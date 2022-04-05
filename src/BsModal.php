@@ -31,7 +31,9 @@ public function openModal($component, $componentAttributes = [], $modalAttribute
         $this->dispatchBrowserEvent('openModalInBrowser');
         if (isset($componentAttributes['id'])) {
             $this > $this->emitTo($component, 'editForm', $componentAttributes['id']);
-        } elseif(isset($componentAttributes['customer_id'])) {
+        }elseif(isset($componentAttributes['customer_id']) && isset($componentAttributes['id'])) {
+            $this > $this->emitTo($component, 'editFormWithCustomerID', $componentAttributes['id'], $componentAttributes['customer_id']);
+        }elseif(isset($componentAttributes['customer_id'])) {
             $this > $this->emitTo($component, 'addFormWithCustomerID', $componentAttributes['customer_id']);
         }else {
             $this > $this->emitTo($component, 'addForm');
